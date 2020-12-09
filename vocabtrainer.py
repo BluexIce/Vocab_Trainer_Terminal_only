@@ -1,7 +1,8 @@
+global englishvocab 
+global turkishvocab 
 
-
-englishlist = []
-turkishlist = []
+#englishlist = []
+#turkishlist = []
 
 def add():
 
@@ -58,7 +59,7 @@ def show_last_english_word():
     with open ("vocab_english.txt") as file:
         for last_english_vocab in file:
             pass
-        print(last_vocab)
+        print(last_english_vocab)
 
 
 def show_last_turkish_word():
@@ -80,8 +81,48 @@ def show_last_turkish_word():
     file.close
 
     
-#def compare():
 
+def readtoarray():
+    with open("vocab_english.txt", "r") as ve:
+        #print("The new english list: " + "\n" + d.read())
+        global englishvocab
+        englishvocab = ve.readlines()
+    
+        
+
+    with open("vocab_turkish.txt", "r") as vt:
+        #print("The new turkish list: " + "\n" + e.read())
+        global turkishvocab
+        turkishvocab = vt.readlines()
+
+        turkishvocab_converted =[]
+
+        for element in turkishvocab:
+            turkishvocab_converted.append(element.strip())
+
+
+        print(turkishvocab)   #with \n
+        print(turkishvocab_converted) # without \n
+
+
+    print(englishvocab[1])
+    print("please write the turkish equivalent: ")
+    word = input()
+    if word == turkishvocab_converted[1]:
+        print("thats right!")    
+    else:
+        print("thats not the right answer!") 
+        print(len(turkishvocab[1])) #5
+        print(len(word))            #4
+        
+def learn():
+    print(englishvocab[1])
+    print("please write the turkish equivalent: ")
+    word = input()
+    if englishvocab[1] == word:
+        print("thats right!")
+    else:
+        print("thats not the right answer!")
         
 
 
@@ -90,11 +131,15 @@ def show_last_turkish_word():
 
 #add()
 #display()
-show_content()
+#show_content()
 #show_last_turkish_word()
 #remove_last_english_word()  #does not work properly
+readtoarray() #writes the file content to an array
+#learn()
+
+#print(englishvocab[1])   # shows the content of the array
+#print(turkishvocab) #
 
 
-
-print(englishlist)
-print(turkishlist)
+#print(englishlist)
+#print(turkishlist)
