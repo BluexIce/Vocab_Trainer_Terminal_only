@@ -72,7 +72,7 @@ def show_last_turkish_word():
     
 
 
-#def remove_last_english_word():
+def remove_last_english_word():
     file = open("vocab_english.txt")
     for x in file:
         print(x)
@@ -118,7 +118,7 @@ def vocab_comparison():
         print("thats right!")    
     else:
         print("thats not the right answer!") 
-        print(len(turkishvocab_readable[1])) #5
+        print(len(turkishvocab[1])) #5
         print(len(word))            #4
         #print(turkishvocab)   #with \n
         #print(turkishvocab_converted) # without \n
@@ -126,7 +126,7 @@ def vocab_comparison():
     #a = str(englishvocab[random.randint(0,len(englishvocab)-1)])
     #print(a)  #prints word in vocab_english.txt
         
-def learn():
+def learn():  # can be deletet. Second try function
     print(englishvocab[1])
     print("please write the turkish equivalent: ")
     word = input()
