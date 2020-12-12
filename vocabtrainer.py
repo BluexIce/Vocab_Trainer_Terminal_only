@@ -1,3 +1,5 @@
+import random
+
 global englishvocab 
 global turkishvocab 
 
@@ -82,38 +84,47 @@ def show_last_turkish_word():
 
     
 
-def readtoarray():
+def vocab_comparison():
+
     with open("vocab_english.txt", "r") as ve:
         #print("The new english list: " + "\n" + d.read())
         global englishvocab
         englishvocab = ve.readlines()
-    
-        
 
     with open("vocab_turkish.txt", "r") as vt:
         #print("The new turkish list: " + "\n" + e.read())
         global turkishvocab
         turkishvocab = vt.readlines()
 
-        turkishvocab_converted =[]
+        turkishvocab_readable = []
 
-        for element in turkishvocab:
-            turkishvocab_converted.append(element.strip())
+        for turkish_element in turkishvocab:
+            turkishvocab_readable.append(turkish_element.strip())
+
+        englishvocab_readable= []
+
+        for english_element in englishvocab:
+            englishvocab_readable.append(english_element.strip())
+    
+    random_number = random.randint(0,len(englishvocab_readable)-1)
+    print(random_number)  # one number
+    
 
 
-        print(turkishvocab)   #with \n
-        print(turkishvocab_converted) # without \n
-
-
-    print(englishvocab[1])
+    print(englishvocab_readable[random_number])
     print("please write the turkish equivalent: ")
     word = input()
-    if word == turkishvocab_converted[1]:
+    if word == turkishvocab_readable[random_number]:
         print("thats right!")    
     else:
         print("thats not the right answer!") 
-        print(len(turkishvocab[1])) #5
+        print(len(turkishvocab_readable[1])) #5
         print(len(word))            #4
+        #print(turkishvocab)   #with \n
+        #print(turkishvocab_converted) # without \n
+
+    #a = str(englishvocab[random.randint(0,len(englishvocab)-1)])
+    #print(a)  #prints word in vocab_english.txt
         
 def learn():
     print(englishvocab[1])
@@ -134,7 +145,7 @@ def learn():
 #show_content()
 #show_last_turkish_word()
 #remove_last_english_word()  #does not work properly
-readtoarray() #writes the file content to an array
+vocab_comparison() #writes the file content to an array
 #learn()
 
 #print(englishvocab[1])   # shows the content of the array
