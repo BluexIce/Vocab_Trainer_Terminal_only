@@ -72,7 +72,7 @@ def show_last_turkish_word():
     
 
 
-def remove_last_english_word():
+def remove_last_english_word():  #removes the whole content of that file
     file = open("vocab_english.txt")
     for x in file:
         print(x)
@@ -82,7 +82,66 @@ def remove_last_english_word():
         i.writelines([word for word in x[:-1]])
     file.close
 
+
+def remove_last_vocab():   #works, removes the last line of the file
+    with open("vocab_english.txt", "r+") as r:
+        global englishvocab
+        englishvocab = r.readlines()
+        englishvocab_readable= []
+
+        for english_element in englishvocab:
+            englishvocab_readable.append(english_element.strip())        
+        #print(englishvocab_readable)  #before we delete a word, the normal list
+        englishvocab_readable.pop()
+        #print(englishvocab_readable)  #after we deleted the last entry
+
+    with open("vocab_english.txt", "w") as w:  #fills the file with the new array
+        for word in englishvocab_readable:
+            w.write(word + "\n")
+
     
+
+
+def remove_word():   #works, deletes the searched word from the english file and compares it with the turkish file and deletes that entry aswell
+    with open("vocab_english.txt", "r+") as r:
+        global englishvocab
+        englishvocab = r.readlines()
+        englishvocab_readable= []
+
+        for english_element in englishvocab:
+            englishvocab_readable.append(english_element.strip())        
+        print(englishvocab_readable)  #shows content of file as a list
+
+
+        print("search a word:")
+        userinput = input()
+        index = englishvocab_readable.index(userinput)
+        print("the word " + userinput + " has the index: ", index) # shows the index of the input(vocab)
+        englishvocab_readable.remove(userinput)
+        print(englishvocab_readable)
+
+        with open("vocab_english.txt", "w") as w:  #fills the file with the new array
+            for word in englishvocab_readable:
+                w.write(word + "\n")
+
+    with open("vocab_turkish.txt", "r+") as r:
+        global turkishvocab
+        turkishvocab = r.readlines()
+        turkishvocab_readable= []
+
+        for turkish_element in turkishvocab:
+            turkishvocab_readable.append(turkish_element.strip())
+
+        turkishvocab_readable.remove(turkishvocab_readable[index])
+        print("should be five elements: ", turkishvocab_readable)
+
+        with open("vocab_turkish.txt", "w") as w:
+            for word in turkishvocab_readable:
+                w.write(word + "\n")
+
+
+
+
 
 def vocab_comparison():
 
@@ -118,6 +177,7 @@ def vocab_comparison():
         print("thats right!")    
     else:
         print("thats not the right answer!") 
+        print("the answer was: "+ turkishvocab_readable[random_number])
         print(len(turkishvocab[1])) #5
         print(len(word))            #4
         #print(turkishvocab)   #with \n
@@ -125,6 +185,12 @@ def vocab_comparison():
 
     #a = str(englishvocab[random.randint(0,len(englishvocab)-1)])
     #print(a)  #prints word in vocab_english.txt
+
+
+
+
+
+     
         
 def learn():  # can be deletet. Second try function
     print(englishvocab[1])
@@ -141,11 +207,11 @@ def learn():  # can be deletet. Second try function
 
 
 #add()
-#display()
+display()
 #show_content()
 #show_last_turkish_word()
 #remove_last_english_word()  #does not work properly
-vocab_comparison() #writes the file content to an array
+##vocab_comparison() #writes the file content to an array
 #learn()
 
 #print(englishvocab[1])   # shows the content of the array
