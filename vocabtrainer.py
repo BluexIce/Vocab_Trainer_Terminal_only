@@ -83,7 +83,7 @@ def remove_last_english_word():  #removes the whole content of that file
     file.close
 
 
-def remove_last_vocab():   #works, removes the last line of the file
+def remove_last_vocab():   #removes last vocab from english first and then from the turkish list
     with open("vocab_english.txt", "r+") as r:
         global englishvocab
         englishvocab = r.readlines()
@@ -91,12 +91,27 @@ def remove_last_vocab():   #works, removes the last line of the file
 
         for english_element in englishvocab:
             englishvocab_readable.append(english_element.strip())        
-        #print(englishvocab_readable)  #before we delete a word, the normal list
+        print(englishvocab_readable)  #before we delete a word, the normal list
         englishvocab_readable.pop()
-        #print(englishvocab_readable)  #after we deleted the last entry
+        print(englishvocab_readable)  #after we deleted the last entry
 
-    with open("vocab_english.txt", "w") as w:  #fills the file with the new array
+    with open("vocab_english.txt", "w") as w:
         for word in englishvocab_readable:
+            w.write(word + "\n")
+
+    with open("vocab_turkish.txt", "r+") as r:
+        global turkishvocab
+        turkishvocab = r.readlines()
+        turkishvocab_readable=[]
+
+        for turkish_element in turkishvocab:
+            turkishvocab_readable.append(turkish_element.strip())
+        print(turkishvocab_readable)
+        turkishvocab_readable.pop()
+        print(turkishvocab_readable)
+
+    with open("vocab_turkish.txt", "w") as w:
+        for word in turkishvocab_readable:
             w.write(word + "\n")
 
     
