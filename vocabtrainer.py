@@ -117,7 +117,7 @@ def remove_last_vocab():   #removes last vocab from english first and then from 
     
 
 
-def remove_word():   #works, deletes the searched word from the english file and compares it with the turkish file and deletes that entry aswell
+def remove_word():   #works, deletes the searched word from only the english file!  index!!!
     with open("vocab_english.txt", "r+") as r:
         global englishvocab
         englishvocab = r.readlines()
@@ -132,27 +132,39 @@ def remove_word():   #works, deletes the searched word from the english file and
         userinput = input()
         index = englishvocab_readable.index(userinput)
         print("the word " + userinput + " has the index: ", index) # shows the index of the input(vocab)
-        englishvocab_readable.remove(userinput)
-        print(englishvocab_readable)
+        
+        useryes="yes"
+        
 
-        with open("vocab_english.txt", "w") as w:  #fills the file with the new array
-            for word in englishvocab_readable:
-                w.write(word + "\n")
+        print("Do you want to remove the word "+ userinput+" from the list?")
+        useranswer= input()
 
-    with open("vocab_turkish.txt", "r+") as r:
-        global turkishvocab
-        turkishvocab = r.readlines()
-        turkishvocab_readable= []
+        if useranswer == useryes:
+        
+            englishvocab_readable.remove(userinput)
+            print(englishvocab_readable)
 
-        for turkish_element in turkishvocab:
-            turkishvocab_readable.append(turkish_element.strip())
+            with open("vocab_english.txt", "w") as w:  #fills the file with the new array
+                for word in englishvocab_readable:
+                    w.write(word + "\n")
 
-        turkishvocab_readable.remove(turkishvocab_readable[index])
-        print("should be five elements: ", turkishvocab_readable)
+            with open("vocab_turkish.txt", "r+") as r:
+                global turkishvocab
+                turkishvocab = r.readlines()
+                turkishvocab_readable= []
 
-        with open("vocab_turkish.txt", "w") as w:
-            for word in turkishvocab_readable:
-                w.write(word + "\n")
+                for turkish_element in turkishvocab:
+                    turkishvocab_readable.append(turkish_element.strip())
+
+                turkishvocab_readable.remove(turkishvocab_readable[index])
+                print("should be five elements: ", turkishvocab_readable)
+
+                with open("vocab_turkish.txt", "w") as w:
+                    for word in turkishvocab_readable:
+                        w.write(word + "\n")
+
+        else:
+            print("No word has been deleted")
 
 
 
